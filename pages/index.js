@@ -24,10 +24,8 @@ export default function Home({ quotes = [] }) {
 }
 
 export async function getServerSideProps(context) {
-  // export async function getStaticProps() {
-  // const res = await fetch("http://0.0.0.0:3000/api/quotes");
-  // const { data: quotes } = await res.json();
-  const quotes = await getQuotes({});
+  const { order, orderBy, limit, offset } = context.query;
+  const quotes = await getQuotes({ orderBy, order, limit, offset });
 
   return {
     props: {
